@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="creditHistoryService" soapui-version="4.5.1" abortOnError="false" runType="SEQUENTIAL" resourceRoot="" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="CreditHistoryServiceImplServiceSoapBinding" type="wsdl" bindingName="{http://service.credit.abc.org/}CreditHistoryServiceImplServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/creditHistoryService/services/creditHistoryServiceImpl?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/creditHistoryService/services/creditHistoryServiceImpl?wsdl"><con:part><con:url>http://localhost:8080/creditHistoryService/services/creditHistoryServiceImpl?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="CreditHistoryServiceImplService" targetNamespace="http://service.credit.abc.org/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://service.credit.abc.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://service.credit.abc.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="getCreditHistory" type="tns:getCreditHistory"/>
+      <xs:element name="getCreditHistoryResponse" type="tns:getCreditHistoryResponse"/>
+      <xs:complexType name="getCreditHistory">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="applicant" type="tns:applicant"/>
+          <xs:element minOccurs="0" name="creditBureauType" type="tns:creditBureauType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="applicant">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="addressLine1" type="xs:string"/>
+          <xs:element minOccurs="0" name="addressLine2" type="xs:string"/>
+          <xs:element minOccurs="0" name="city" type="xs:string"/>
+          <xs:element minOccurs="0" name="dateOfBirth" type="xs:string"/>
+          <xs:element minOccurs="0" name="firstName" type="xs:string"/>
+          <xs:element minOccurs="0" name="id" type="xs:int"/>
+          <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+          <xs:element minOccurs="0" name="postalCode" type="xs:string"/>
+          <xs:element minOccurs="0" name="ssn" type="xs:string"/>
+          <xs:element minOccurs="0" name="stateCode" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getCreditHistoryResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:creditHistory"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="creditHistory">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="applicantId" type="xs:int"/>
+          <xs:element minOccurs="0" name="creditBureau" type="tns:creditBureauType"/>
+          <xs:element minOccurs="0" name="creditScore" type="xs:string"/>
+          <xs:element minOccurs="0" name="id" type="xs:int"/>
+          <xs:element minOccurs="0" name="requestedDate" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="creditBureauType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="TRANSUNION"/>
+          <xs:enumeration value="EQUIFAX"/>
+          <xs:enumeration value="EXPERIAN"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="CreditHistoryValidationException" type="tns:CreditHistoryValidationException"/>
+      <xs:complexType name="CreditHistoryValidationException">
+        <xs:sequence/>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="CreditHistoryValidationException">
+    <wsdl:part element="tns:CreditHistoryValidationException" name="CreditHistoryValidationException"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCreditHistoryResponse">
+    <wsdl:part element="tns:getCreditHistoryResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCreditHistory">
+    <wsdl:part element="tns:getCreditHistory" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="creditHistoryService">
+    <wsdl:operation name="getCreditHistory">
+      <wsdl:input message="tns:getCreditHistory" name="getCreditHistory"></wsdl:input>
+      <wsdl:output message="tns:getCreditHistoryResponse" name="getCreditHistoryResponse"></wsdl:output>
+      <wsdl:fault message="tns:CreditHistoryValidationException" name="CreditHistoryValidationException"></wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CreditHistoryServiceImplServiceSoapBinding" type="tns:creditHistoryService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getCreditHistory">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getCreditHistory">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getCreditHistoryResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="CreditHistoryValidationException">
+        <soap:fault name="CreditHistoryValidationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CreditHistoryServiceImplService">
+    <wsdl:port binding="tns:CreditHistoryServiceImplServiceSoapBinding" name="CreditHistoryServiceImplPort">
+      <soap:address location="http://localhost:8080/creditHistoryService/services/creditHistoryServiceImpl"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/creditHistoryService/services/creditHistoryServiceImpl</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="getCreditHistory" bindingOperationName="getCreditHistory" type="Request-Response" outputName="getCreditHistoryResponse" inputName="getCreditHistory" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/creditHistoryService/services/creditHistoryServiceImpl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.credit.abc.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:getCreditHistory>
+         <!--Optional:-->
+         <applicant>
+            <!--Optional:-->
+            <addressLine1>?</addressLine1>
+            <!--Optional:-->
+            <addressLine2>?</addressLine2>
+            <!--Optional:-->
+            <city>?</city>
+            <!--Optional:-->
+            <dateOfBirth>?</dateOfBirth>
+            <!--Optional:-->
+            <firstName>?</firstName>
+            <!--Optional:-->
+            <id>1</id>
+            <!--Optional:-->
+            <lastName>?</lastName>
+            <!--Optional:-->
+            <postalCode>?</postalCode>
+            <!--Optional:-->
+            <ssn>?</ssn>
+            <!--Optional:-->
+            <stateCode>?</stateCode>
+         </applicant>
+         <!--Optional:-->
+         <creditBureauType>EQUIFAX</creditBureauType>
+      </ser:getCreditHistory>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.credit.abc.org/creditHistoryService/getCreditHistory"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>

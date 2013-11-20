@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="loanProcessingService" resourceRoot="" soapui-version="4.5.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="LoanProcessingServiceImplServiceSoapBinding" type="wsdl" bindingName="{http://service.loan.abc.org/}LoanProcessingServiceImplServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/loanProcessService/services/loanProcessingService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/loanProcessService/services/loanProcessingService?wsdl"><con:part><con:url>http://localhost:8080/loanProcessService/services/loanProcessingService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="LoanProcessingServiceImplService" targetNamespace="http://service.loan.abc.org/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://service.loan.abc.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://service.loan.abc.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="getApplicationStatus" type="tns:getApplicationStatus"/>
+      <xs:element name="getApplicationStatusResponse" type="tns:getApplicationStatusResponse"/>
+      <xs:complexType name="getApplicationStatus">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="applicationId" type="xs:string"/>
+          <xs:element minOccurs="0" name="firstName" type="xs:string"/>
+          <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getApplicationStatusResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:applicationStatus"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="applicationStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="PENDING"/>
+          <xs:enumeration value="APPROVED"/>
+          <xs:enumeration value="DECLINED"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="LoanProcessingValidationException" type="tns:LoanProcessingValidationException"/>
+      <xs:complexType name="LoanProcessingValidationException">
+        <xs:sequence/>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="LoanProcessingValidationException">
+    <wsdl:part element="tns:LoanProcessingValidationException" name="LoanProcessingValidationException"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getApplicationStatus">
+    <wsdl:part element="tns:getApplicationStatus" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getApplicationStatusResponse">
+    <wsdl:part element="tns:getApplicationStatusResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="loanProcessingService">
+    <wsdl:operation name="getApplicationStatus">
+      <wsdl:input message="tns:getApplicationStatus" name="getApplicationStatus"></wsdl:input>
+      <wsdl:output message="tns:getApplicationStatusResponse" name="getApplicationStatusResponse"></wsdl:output>
+      <wsdl:fault message="tns:LoanProcessingValidationException" name="LoanProcessingValidationException"></wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="LoanProcessingServiceImplServiceSoapBinding" type="tns:loanProcessingService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getApplicationStatus">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getApplicationStatus">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getApplicationStatusResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="LoanProcessingValidationException">
+        <soap:fault name="LoanProcessingValidationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="LoanProcessingServiceImplService">
+    <wsdl:port binding="tns:LoanProcessingServiceImplServiceSoapBinding" name="LoanProcessingServiceImplPort">
+      <soap:address location="http://localhost:8080/loanProcessService/services/loanProcessingService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/loanProcessService/services/loanProcessingService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="getApplicationStatus" bindingOperationName="getApplicationStatus" type="Request-Response" outputName="getApplicationStatusResponse" inputName="getApplicationStatus" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/loanProcessService/services/loanProcessingService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.loan.abc.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:getApplicationStatus>
+         <!--Optional:-->
+         <applicationId>2</applicationId>
+         <!--Optional:-->
+         <firstName>vinay</firstName>
+         <!--Optional:-->
+         <lastName>shiva</lastName>
+      </ser:getApplicationStatus>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.loan.abc.org/loanProcessingService/getApplicationStatus"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>

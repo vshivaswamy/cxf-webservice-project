@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	                    http://www.springframework.org/schema/beans/spring-beans.xsd
+	                    http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+	                    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+	                    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	<context:annotation-config/>
+	<context:component-scan base-package="org.abc.credit" />
+	<aop:aspectj-autoproxy/>
+	
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+	
+	<bean id="methodValidationPostProcessor" class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor"/>
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+	<bean id="validatorAspect" class="org.abc.credit.aspect.ValidatorAspect"/>
+	
+	<bean id="customAuthInInterceptor" class="org.abc.credit.interceptor.CustomAuthInInterceptor"/>
+	
+	<bean id="customAuthOutInterceptor" class="org.abc.credit.interceptor.CustomAuthOutInterceptor"/>
+	
+    <bean id="creditHistoryServiceImpl" class="org.abc.credit.service.CreditHistoryServiceImpl" />
+    
+	<jaxws:endpoint 
+	  	id="creditHistoryService" 
+	  	implementor="#creditHistoryServiceImpl"
+	  	address="/creditHistoryServiceImpl" >
+	  
+	  	<!-- <jaxws:inInterceptors>
+	  		<ref bean="customAuthInInterceptor"/> 
+		</jaxws:inInterceptors> -->
+		<jaxws:outInterceptors>
+			<ref bean="customAuthOutInterceptor"/>
+		</jaxws:outInterceptors>
+		
+	</jaxws:endpoint>
+	  
+</beans>
